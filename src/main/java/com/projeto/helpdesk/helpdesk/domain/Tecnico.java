@@ -1,9 +1,16 @@
 package com.projeto.helpdesk.helpdesk.domain;
 
+import com.projeto.helpdesk.helpdesk.domain.enums.Perfil;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tecnico extends Pessoa{
+@Entity
+public class Tecnico extends Pessoa implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public void setChamados(List<Chamado> chamados) {
         this.chamados = chamados;
@@ -13,13 +20,16 @@ public class Tecnico extends Pessoa{
         return chamados;
     }
 
+    @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
 
     public Tecnico() {
         super();
+        addPerfil(Perfil.TECNICO);
     }
 
     public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
         super(id, nome, cpf, email, senha);
+        addPerfil(Perfil.TECNICO);
     }
 }
