@@ -1,5 +1,6 @@
 package com.projeto.helpdesk.helpdesk.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto.helpdesk.helpdesk.domain.enums.Perfil;
 
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ public class Tecnico extends Pessoa implements Serializable {
         return chamados;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
 
