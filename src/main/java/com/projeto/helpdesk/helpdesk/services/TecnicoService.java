@@ -12,7 +12,7 @@ public class TecnicoService {
     private TecnicoRepository repository;
 
     public Tecnico findById(Integer id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElse(new Tecnico());
     }
 
 

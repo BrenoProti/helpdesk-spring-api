@@ -27,7 +27,6 @@ public class DBService {
 
     public void instanciarDB() {
         Tecnico tec1 = new Tecnico(null, "Valdir Cesar", "293.956.790-50", "validr@email.com", "123");
-        tec1.addPerfil(Perfil.ADMIN);
         tecnicoRepository.saveAll(Arrays.asList(tec1));
 
         Cliente cli1 = new Cliente(null, "Linus Torvalds", "256.221.610-53", "torvalds@email.com", "123");
