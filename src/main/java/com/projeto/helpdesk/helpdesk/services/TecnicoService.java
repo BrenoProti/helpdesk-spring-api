@@ -2,6 +2,7 @@ package com.projeto.helpdesk.helpdesk.services;
 
 import com.projeto.helpdesk.helpdesk.domain.Tecnico;
 import com.projeto.helpdesk.helpdesk.repositories.TecnicoRepository;
+import com.projeto.helpdesk.helpdesk.services.exception.ObjetcNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public class TecnicoService {
     private TecnicoRepository repository;
 
     public Tecnico findById(Integer id) {
-        return repository.findById(id).orElse(new Tecnico());
+        return repository.findById(id).orElseThrow(() -> new ObjetcNotFoundException("Técnico não encontrado!"));
     }
 
 
