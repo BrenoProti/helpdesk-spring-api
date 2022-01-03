@@ -23,4 +23,10 @@ public class TecnicoService {
     public List<TecnicoDTO> findAll() {
         return repository.findAll().stream().map(TecnicoDTO::new).collect(Collectors.toList());
     }
+
+    public Tecnico create(TecnicoDTO tecnicoDto) {
+        tecnicoDto.setId(null);
+        Tecnico novoTecnico = new Tecnico(tecnicoDto);
+        return repository.save(novoTecnico);
+    }
 }
