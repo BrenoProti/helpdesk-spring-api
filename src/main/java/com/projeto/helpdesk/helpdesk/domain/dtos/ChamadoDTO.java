@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -25,11 +26,17 @@ public class ChamadoDTO implements Serializable {
     private LocalDate dataAbertura = LocalDate.now();
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFechamento;
+    @NotNull
     private Integer prioridade;
-    private Status status;
+    @NotNull
+    private Integer status;
+    @NotNull
     private String titulo;
+    @NotNull
     private String observacoes;
+    @NotNull
     private Integer tecnico;
+    @NotNull
     private Integer cliente;
     private String nomeTecnico;
     private String nomeCliente;
@@ -43,7 +50,7 @@ public class ChamadoDTO implements Serializable {
         this.dataAbertura = chamado.getDataAbertura();
         this.dataFechamento = chamado.getDataFechamento();
         this.prioridade = chamado.getPrioridade().getCodigo();
-        this.status = chamado.getStatus();
+        this.status = chamado.getStatus().getCodigo();
         this.titulo = chamado.getTitulo();
         this.observacoes = chamado.getObservacoes();
         this.tecnico = chamado.getTecnico().getId();
@@ -84,11 +91,11 @@ public class ChamadoDTO implements Serializable {
         this.prioridade = prioridade;
     }
 
-    public Status getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

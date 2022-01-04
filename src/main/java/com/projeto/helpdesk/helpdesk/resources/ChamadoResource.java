@@ -1,5 +1,6 @@
 package com.projeto.helpdesk.helpdesk.resources;
 
+import com.projeto.helpdesk.helpdesk.domain.Chamado;
 import com.projeto.helpdesk.helpdesk.domain.Cliente;
 import com.projeto.helpdesk.helpdesk.domain.dtos.ChamadoDTO;
 import com.projeto.helpdesk.helpdesk.domain.dtos.ClienteDTO;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -34,16 +36,16 @@ public class ChamadoResource {
 
     @GetMapping
     public ResponseEntity<List<ChamadoDTO>> findAll() {
-        List<ChamadoDTO> clientes = service.findAll();
-        return ResponseEntity.ok().body(clientes);
+        List<ChamadoDTO> chamados = service.findAll();
+        return ResponseEntity.ok().body(chamados);
     }
-//
-//    @PostMapping
-//    public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO clienteDTO) {
-//        Cliente cliente = service.create(clienteDTO);
-//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
-//        return ResponseEntity.created(uri).build();
-//    }
+
+    @PostMapping
+    public ResponseEntity<ChamadoDTO> create(@Valid @RequestBody ChamadoDTO chamadoDto) {
+        Chamado chamado = service.create(chamadoDto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(chamado.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
 //
 //    @PutMapping(value = "/{id}")
 //    public ResponseEntity<ClienteDTO> update(@PathVariable Integer id, @RequestBody ClienteDTO clienteDto) {
