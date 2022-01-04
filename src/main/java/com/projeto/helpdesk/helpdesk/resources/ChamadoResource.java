@@ -32,11 +32,11 @@ public class ChamadoResource {
         return ResponseEntity.ok().body(new ChamadoDTO(service.findById(id)));
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<ClienteDTO>> findAll() {
-//        List<ClienteDTO> clientes = service.findAll();
-//        return ResponseEntity.ok().body(clientes);
-//    }
+    @GetMapping
+    public ResponseEntity<List<ChamadoDTO>> findAll() {
+        List<ChamadoDTO> clientes = service.findAll();
+        return ResponseEntity.ok().body(clientes);
+    }
 //
 //    @PostMapping
 //    public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO clienteDTO) {
