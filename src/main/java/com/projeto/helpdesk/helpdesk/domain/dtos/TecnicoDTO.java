@@ -3,7 +3,9 @@ package com.projeto.helpdesk.helpdesk.domain.dtos;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.helpdesk.helpdesk.domain.Tecnico;
 import com.projeto.helpdesk.helpdesk.domain.enums.Perfil;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -14,9 +16,14 @@ public class TecnicoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected Integer id;
+    @NotNull
     protected String nome;
+    @CPF
+    @NotNull
     protected String cpf;
+    @NotNull
     protected String email;
+    @NotNull
     protected String senha;
     protected Set<Integer> perfis = new HashSet<>();
     @JsonFormat(pattern = "dd/MM/yyyy")

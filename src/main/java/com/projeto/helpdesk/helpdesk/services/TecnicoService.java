@@ -47,4 +47,12 @@ public class TecnicoService {
             throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
         }
     }
+
+    public Tecnico update(Integer id, TecnicoDTO tecnicoDto) {
+        tecnicoDto.setId(id);
+        findById(id);
+        validateCpfAndEmail(tecnicoDto);
+        Tecnico tecnico = new Tecnico(tecnicoDto);
+        return repository.save(tecnico);
+    }
 }
