@@ -46,16 +46,10 @@ public class ChamadoResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(chamado.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-//
-//    @PutMapping(value = "/{id}")
-//    public ResponseEntity<ClienteDTO> update(@PathVariable Integer id, @RequestBody ClienteDTO clienteDto) {
-//        Cliente cliente = service.update(id, clienteDto);
-//        return ResponseEntity.ok().body(new ClienteDTO(cliente));
-//    }
-//
-//    @DeleteMapping(value = "/{id}")
-//    public ResponseEntity<ClienteDTO> delete(@PathVariable Integer id) {
-//        Cliente cliente = service.delete(id);
-//        return ResponseEntity.ok().body(new ClienteDTO(cliente));
-//    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ChamadoDTO> update(@PathVariable Integer id, @RequestBody ChamadoDTO chamadoDto) {
+        Chamado chamado = service.update(id, chamadoDto);
+        return ResponseEntity.ok().body(new ChamadoDTO(chamado));
+    }
 }

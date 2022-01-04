@@ -8,9 +8,11 @@ import com.projeto.helpdesk.helpdesk.domain.enums.Prioridade;
 import com.projeto.helpdesk.helpdesk.domain.enums.Status;
 import com.projeto.helpdesk.helpdesk.repositories.ChamadoRepository;
 import com.projeto.helpdesk.helpdesk.services.exception.ObjetcNotFoundException;
+import org.hibernate.bytecode.internal.bytebuddy.BytecodeProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,12 +39,23 @@ public class ChamadoService {
         return repository.save(newChamado(chamadoDto));
     }
 
+    public Chamado update(Integer id, ChamadoDTO dto) {
+        dto.setId(id);
+        findById(id);
+        Chamado chamado = newChamado(dto);
+        return repository.save(chamado);
+    }
+
+
     private Chamado newChamado(ChamadoDTO chamadoDTO) {
         Tecnico tecnico = tecnicoService.findById(chamadoDTO.getTecnico());
         Cliente cliente = clienteService.findById(chamadoDTO.getCliente());
         Chamado chamado = new Chamado();
         if (chamadoDTO.getId() != null) {
             chamado.setId(chamadoDTO.getId());
+        }
+        if (chamadoDTO.getStatus().equals(2)) {
+            chamado.setDataFechamento(LocalDate.now());
         }
         chamado.setCliente(cliente);
         chamado.setTecnico(tecnico);
