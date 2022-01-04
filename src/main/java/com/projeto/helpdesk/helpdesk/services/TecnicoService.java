@@ -9,6 +9,7 @@ import com.projeto.helpdesk.helpdesk.services.exception.DataIntegrityViolationEx
 import com.projeto.helpdesk.helpdesk.services.exception.ObjetcNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,5 +55,14 @@ public class TecnicoService {
         validateCpfAndEmail(tecnicoDto);
         Tecnico tecnico = new Tecnico(tecnicoDto);
         return repository.save(tecnico);
+    }
+
+    public Tecnico delete(Integer id) {
+        Tecnico tecnico = findById(id);
+        if (!CollectionUtils.isEmpty(tecnico.getChamados())) {
+            throw new DataIntegrityViolationException("Técnico possui chamado, e não pode ser deletado!");
+        }
+        repository.deleteById(id);
+        return tecnico;
     }
 }
